@@ -35,7 +35,7 @@ RUN apt-get update
 RUN apt-get -y install g++ wget rapidjson-dev libasio-dev libzip4 libzip-dev
 
 WORKDIR /usr/local/src
-RUN wget https://github.com/crankycyclops/trogdor-pp/archive/refs/tags/$MODULE_VER.tar.gz
+RUN wget https://github.com/crankycyclops/trogdord_php/archive/refs/tags/$MODULE_VER.tar.gz
 RUN tar -zvxpf $MODULE_VER.tar.gz
 WORKDIR /usr/local/src/trogdor-pp-$MODULE_VER/src/php7/trogdord
 
