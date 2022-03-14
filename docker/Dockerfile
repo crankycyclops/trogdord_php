@@ -1,15 +1,15 @@
 # This docker file is exactly the same as the official php:8.1-fpm container,
 # but adds to it the trogdord extension.
 
-# To build for 8.1: docker build -t crankycyclops/php8.1-fpm-trogdord-ext:0.90.0 .
-# To build for 8.0: docker build --build-arg PHP_VER=8.0 -t crankycyclops/php8.0-fpm-trogdord-ext:0.90.0 .
-# To build for 7.4: docker build --build-arg PHP_VER=7.4 -t crankycyclops/php7.4-fpm-trogdord-ext:0.90.0 .
+# To build for 8.1: docker build --build-arg MODULE_VER=<version> -t crankycyclops/php8.1-fpm-trogdord-ext:<version> .
+# To build for 8.0: docker build --build-arg PHP_VER=8.0 --build-arg MODULE_VER=<version> -t crankycyclops/php8.0-fpm-trogdord-ext:<version> .
+# To build for 7.4: docker build --build-arg PHP_VER=7.4 --build-arg MODULE_VER=<version> -t crankycyclops/php7.4-fpm-trogdord-ext:<version> .
 
 # To build a version that includes npm (required to bootstrap newly installed Laraval applications):
 
-# docker build --build-arg PHP_VER=8.1 --build-arg INCLUDE_NPM=true -t crankycyclops/php8.1-fpm-trogdord-ext-npm:0.90.0 .
-# docker build --build-arg PHP_VER=8.0 --build-arg INCLUDE_NPM=true -t crankycyclops/php8.0-fpm-trogdord-ext-npm:0.90.0 .
-# docker build --build-arg PHP_VER=7.4 --build-arg INCLUDE_NPM=true -t crankycyclops/php7.4-fpm-trogdord-ext-npm:0.90.0 .
+# docker build --build-arg PHP_VER=8.1 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php8.1-fpm-trogdord-ext-npm:<version> .
+# docker build --build-arg PHP_VER=8.0 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php8.0-fpm-trogdord-ext-npm:<version> .
+# docker build --build-arg PHP_VER=7.4 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php7.4-fpm-trogdord-ext-npm:<version> .
 
 # If you connect to the container and can't run npm, execute the following command first:
 # source /etc/profile
@@ -26,13 +26,18 @@ FROM php:${PHP_VER}-fpm
 # See: https://stackoverflow.com/a/56748289
 ARG INCLUDE_NPM
 
+# Required: tells us which version of the repository to build with
+ARG MODULE_VER
+RUN test -n "$MODULE_VER"
+ENV MODULE_VER=${MODULE_VER}
+
 RUN apt-get update
 RUN apt-get -y install g++ wget rapidjson-dev libasio-dev libzip4 libzip-dev
 
 WORKDIR /usr/local/src
-RUN wget https://github.com/crankycyclops/trogdor-pp/archive/refs/tags/0.90.0.tar.gz
-RUN tar -zvxpf 0.90.0.tar.gz
-WORKDIR /usr/local/src/trogdor-pp-0.90.0/src/php7/trogdord
+RUN wget https://github.com/crankycyclops/trogdor-pp/archive/refs/tags/$MODULE_VER.tar.gz
+RUN tar -zvxpf $MODULE_VER.tar.gz
+WORKDIR /usr/local/src/trogdor-pp-$MODULE_VER/src/php7/trogdord
 
 RUN phpize && ./configure && make -j$(nproc) && make install
 RUN docker-php-ext-enable trogdord
@@ -60,7 +65,10 @@ fi
 # Cleanup after building
 RUN apt-get remove -y g++ wget rapidjson-dev libasio-dev
 RUN apt-get autoremove -y
-RUN rm -rf /usr/local/src/trogdor-pp-0.90.0
+RUN rm -rf /usr/local/src/trogdor-pp-$MODULE_VER
+
+# Without this, we won't be able to find the npm command when connecting to a running container via bash
+ENV BASH_ENV="/etc/profile"
 
 WORKDIR /
 ENTRYPOINT ["php-fpm"]
