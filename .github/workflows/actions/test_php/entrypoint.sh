@@ -67,18 +67,6 @@ cd ../php7/trogdord
 #          Run tests         #
 ##############################
 
-runTest 7.2
-
-if [ $? -ne 0 ]; then
-	exit 1
-fi
-
-runTest 7.3
-
-if [ $? -ne 0 ]; then
-	exit 1
-fi
-
 runTest 7.4
 
 if [ $? -ne 0 ]; then
@@ -86,6 +74,12 @@ if [ $? -ne 0 ]; then
 fi
 
 runTest 8.0
+
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+
+runTest 8.1
 
 if [ $? -ne 0 ]; then
 	exit 1
