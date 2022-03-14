@@ -37,7 +37,7 @@ RUN apt-get -y install g++ wget rapidjson-dev libasio-dev libzip4 libzip-dev
 WORKDIR /usr/local/src
 RUN wget https://github.com/crankycyclops/trogdord_php/archive/refs/tags/$MODULE_VER.tar.gz
 RUN tar -zvxpf $MODULE_VER.tar.gz
-WORKDIR /usr/local/src/trogdor-pp-$MODULE_VER/src/php7/trogdord
+WORKDIR /usr/local/src/trogdord_php-$MODULE_VER
 
 RUN phpize && ./configure && make -j$(nproc) && make install
 RUN docker-php-ext-enable trogdord
@@ -65,7 +65,7 @@ fi
 # Cleanup after building
 RUN apt-get remove -y g++ wget rapidjson-dev libasio-dev
 RUN apt-get autoremove -y
-RUN rm -rf /usr/local/src/trogdor-pp-$MODULE_VER
+RUN rm -rf /usr/local/src/trogdord_php-$MODULE_VER
 
 # Without this, we won't be able to find the npm command when connecting to a running container via bash
 ENV BASH_ENV="/etc/profile"
