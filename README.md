@@ -2,7 +2,7 @@
 
 # Trogdord Extension for PHP 7/8
 
-The official PHP 7 and 8 client for trogdord.
+The official PHP 7 and 8 client for trogdord. This is part of the [Trogdor++](https://github.com/crankycyclops/trogdor-pp) project.
 
 ## Dependencies
 
