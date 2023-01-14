@@ -6,7 +6,7 @@ The official PHP 7 and 8 client for trogdord. This is part of the [Trogdor++](ht
 
 ## Dependencies
 
-* [PHP](https://www.php.net/) 7.2 (no longer tested), 7.3 (no longer tested), 7.4, 8.0, or 8.1, along with the include files and access to phpize
+* [PHP](https://www.php.net/) 8.0, 8.1, or 8.2, along with the include files and access to phpize. As of version 0.30.1, the extension will still build against 7.2, 7.3, and 7.4, but those versions of PHP are now EOL, are no longer tested, and should not be relied upon to work in future versions.
 * [Standalone ASIO library](https://think-async.com/Asio/) >=1.10
 * [RapidJSON](https://rapidjson.org/) >= 1.1.0
 
