@@ -11,7 +11,7 @@ CONFIGURE_FLAGS="--enable-zip --enable-bcmath --enable-ctype --enable-json --ena
 if [ -z $VER ]; then
 
 	echo
-	echo "$0 <full php version (ex: 7.3.13)>"
+	echo "$0 <full php version (ex: 8.0.27)>"
 	echo
 
 	exit 1

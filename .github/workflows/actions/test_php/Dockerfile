@@ -32,9 +32,9 @@ RUN make -j2 trogdord && make install
 # Build and install each PHP version from source
 COPY buildphp.sh /buildphp.sh
 RUN chmod +x /buildphp.sh
-RUN /buildphp.sh 7.4.28
-RUN /buildphp.sh 8.0.16
-RUN /buildphp.sh 8.1.3
+RUN /buildphp.sh 8.0.27
+RUN /buildphp.sh 8.1.14
+RUN /buildphp.sh 8.2.1
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
