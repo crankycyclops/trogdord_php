@@ -13,7 +13,7 @@ The official PHP client for trogdord. This is part of the [Trogdor++](https://gi
 If you happen to be on an Ubuntu box (and possibly also on Debian), you can install these dependencies with the following command:
 
 ```
-sudo apt-get install php7.x-dev libasio-dev rapidjson-dev (where 7.x is your desired php version)
+sudo apt-get install php8.x-dev libasio-dev rapidjson-dev (where 8.x is your desired php version)
 ```
 
 The configure script doesn't currently check for the existence of ASIO or RapidJSON, but if either of these libraries are missing or are not in a place where the configure script can find them, the build will fail.
