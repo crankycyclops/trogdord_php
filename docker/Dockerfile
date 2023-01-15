@@ -1,22 +1,22 @@
 # This docker file is exactly the same as the official php:8.1-fpm container,
 # but adds to it the trogdord extension.
 
-# To build for 8.1: docker build --build-arg MODULE_VER=<version> -t crankycyclops/php8.1-fpm-trogdord-ext:<version> .
 # To build for 8.0: docker build --build-arg PHP_VER=8.0 --build-arg MODULE_VER=<version> -t crankycyclops/php8.0-fpm-trogdord-ext:<version> .
-# To build for 7.4: docker build --build-arg PHP_VER=7.4 --build-arg MODULE_VER=<version> -t crankycyclops/php7.4-fpm-trogdord-ext:<version> .
+# To build for 8.1: docker build --build-arg PHP_VER=8.1 --build-arg MODULE_VER=<version> -t crankycyclops/php8.1-fpm-trogdord-ext:<version> .
+# To build for 8.2: docker build --build-arg PHP_VER=8.2 --build-arg MODULE_VER=<version> -t crankycyclops/php8.2-fpm-trogdord-ext:<version> .
 
 # To build a version that includes npm (required to bootstrap newly installed Laraval applications):
 
-# docker build --build-arg PHP_VER=8.1 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php8.1-fpm-trogdord-ext-npm:<version> .
 # docker build --build-arg PHP_VER=8.0 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php8.0-fpm-trogdord-ext-npm:<version> .
-# docker build --build-arg PHP_VER=7.4 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php7.4-fpm-trogdord-ext-npm:<version> .
+# docker build --build-arg PHP_VER=8.1 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php8.1-fpm-trogdord-ext-npm:<version> .
+# docker build --build-arg PHP_VER=8.2 --build-arg INCLUDE_NPM=true --build-arg MODULE_VER=<version> -t crankycyclops/php8.2-fpm-trogdord-ext-npm:<version> .
 
 # If you connect to the container and can't run npm, execute the following command first:
 # source /etc/profile
 # I've noticed that this gets borked when I set DOCKER_UID. Oh well.
 
 # Determines which version of PHP we're building the container for
-ARG PHP_VER=8.1
+ARG PHP_VER=8.2
 
 # Determines whether or not we add support for npm (disabled by default)
 ARG INCLUDE_NPM=false
